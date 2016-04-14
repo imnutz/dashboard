@@ -1,9 +1,9 @@
 "use strict";
 
-let _present;
+let menu = require("./menu");
 
-const init = (present) => {
-    _present = present;
-}
+const init = function init(_present) {
+    menu.init(_present);
+};
 
-module.exports = { init };
+module.exports = { init, menu };

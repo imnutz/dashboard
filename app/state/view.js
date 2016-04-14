@@ -18,7 +18,7 @@ const init = (data, actions) => {
 
 const ready = (data, actions) => {
     return h("div.wrapper", [
-        theme.sidebar.menu(data.menu),
+        theme.sidebar.menu(data.menu, actions.menu),
         h("div.main-panel", [
             theme.header.header("Lorem ipsum dolor sit."),
             theme.home.dashboard()

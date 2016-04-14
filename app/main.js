@@ -5,7 +5,7 @@ const start = (state, actions, model, view, theme) => {
 
     actions.init(model.present);
 
-    model.init(state.render);
+    model.setRender(state.render);
 
     view.display(view.init(model.init(), actions));
 };
