@@ -44,7 +44,10 @@ const saleLegends = [
 ];
 
 const legend = (legend) => {
-    return h("i", {props:{class:legend.iconClass}}, String(legend));
+    return h("span", [
+        h("i", {attrs:{class:legend.iconClass}}),
+        h("span", String(legend.title))
+    ])
 };
 
 const legends = (legends) => {
@@ -58,7 +61,8 @@ const emailStatistics = () => {
             legends(emailLegends),
             h("hr"),
             h("div.stats", [
-                h("i.fa.fa-clock-o", "Campaign sent 2 days ago")
+                h("i.fa.fa-clock-o"),
+                h("span", "Campaign sent 2 days ago")
             ])
         ])
     ]);
@@ -71,7 +75,8 @@ const userBehavior = () => {
             legends(userBehaviorLegends),
             h("hr"),
             h("div.stats", [
-                h("i.fa.fa-history", "Updated 3 minutes ago")
+                h("i.fa.fa-history"),
+                h("span", "Updated 3 minutes ago")
             ])
         ])
     ]);
@@ -84,7 +89,8 @@ const sales = () => {
             legends(saleLegends),
             h("hr"),
             h("div.stats", [
-                h("i.fa.fa-check", "Data information certified")
+                h("i.fa.fa-check"),
+                h("span", "Data information certified")
             ])
         ])
     ]);

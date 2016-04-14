@@ -2,12 +2,12 @@
 
 let Type = require("union-type");
 
-let Header = Type({
-    Header: {
-        title: String,
-        leftNavMenu: Array,
-        rightNavMenu: Array
-    }
-});
+let header = {
+    title: "",
+    leftNavMenu: [],
+    rightNavMenu: []
+};
 
-module.exports = Header;
+const init = () => ({ title: "Dashboard", leftNavMenu: [], rightNavMenu: [] });
+
+module.exports = { init };
