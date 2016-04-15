@@ -1,8 +1,8 @@
 "use strict";
 
-let h = require("snabbdom/h");
+var h = require("snabbdom/h");
 
-const navbarHeader = (title) => {
+var navbarHeader = function navbarHeader(title) {
     return h("div.navbar-header", [
         h("button.navbar-toggle", {attrs:{"data-toggle":"collapse", "data-target":"#navgitation-example-2"}}, [
             h("span.sr-only", "Toggle navigation"),
@@ -14,7 +14,7 @@ const navbarHeader = (title) => {
     ]);
 };
 
-const navbarLeft = (toggleIcon) => {
+var navbarLeft = function navbarLeft(toggleIcon) {
     return h("ul.nav.navbar-nav.navbar-left", [
         h("li", [
             h("a.dropdown-toggle", {props:{href:"#"}, attrs:{"data-toggle":"dropdown"}}, [
@@ -43,7 +43,7 @@ const navbarLeft = (toggleIcon) => {
     ]);
 };
 
-const navbarRight = () => {
+var navbarRight = function navbarRight() {
     return h("ul.nav.navbar-nav.navbar-right", [
         h("li", [
             h("a", {props:{href:"#"}}, "Account")
@@ -69,14 +69,14 @@ const navbarRight = () => {
     ]);
 };
 
-const navbarCollapse = () => {
+var navbarCollapse = function navbarCollapse() {
     return h("div.collapse.navbar-collapse", [
         navbarLeft("fa-dashboard"),
         navbarRight()
     ])
 };
 
-const header = (title) => {
+var header = function header(title) {
     return h("div.navbar.navbar-default.navbar-fixed", [
         h("div.container-fluid", [
             navbarHeader(title),

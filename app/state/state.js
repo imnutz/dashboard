@@ -1,23 +1,23 @@
 "use strict";
 
-let _actions,
+var _actions,
     _view;
 
-const init = (actions, view) => {
+var init = function init(actions, view) {
     _actions = actions;
     _view = view;
 };
 
-const render = (data) => {
+var render = function render(data) {
     representation(data);
     nap(data);
 };
 
-const representation = (data) => {
-    _view.display(data, _actions);
+var representation = function representation(data) {
+    return _view.display(_view.ready(data, _actions));
 };
 
-const nap = (data) => {
+var nap = function nap(data) {
 
 };
 

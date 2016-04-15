@@ -1,15 +1,15 @@
 "use strict";
 
-let h = require("snabbdom/h");
+var h = require("snabbdom/h");
 
-const logo = () => {
+var logo = function logo() {
     return h("div.logo", [
         h("a.simple-text", {props:{href:"#"}}, "Dashboard")
     ]);
 };
 
-const menuItem = (actions, item) => {
-    let itemHandler = (evt) => {
+var menuItem = function menuItem(actions, item) {
+    var itemHandler = function(evt) {
         evt.preventDefault();
         actions.selectRoute(item.route);
     };
@@ -22,11 +22,11 @@ const menuItem = (actions, item) => {
     ]);
 };
 
-const menuItems = (items, actions) => {
+var menuItems = function menuItems(items, actions) {
     return h("ul.nav", items.map(menuItem.bind(actions, actions)));
 };
 
-const menu = (items, actions) => {
+var menu = function menu(items, actions) {
     return h("div.sidebar", {attrs:{"data-color":"purple", "data-image": "assets/img/sidebar-5.jpg"}}, [
         h("div.sidebar-wrapper", [
             logo(),

@@ -1,32 +1,47 @@
 "use strict";
 
-let Type = require("union-type");
+var menu = require("./menu");
+var header = require("./header");
+var footer = require("./footer");
 
-let Menu = require("./menu");
-let Header = require("./header");
-
-let dashboard = {
+// Model of application
+var dashboard = {
     header: null,
     menu: null,
-    currentRoute: "home"
-};
+    footer: null,
+    currentRoute: "home",
 
-let _render;
-
-const setRender = (render) => {
-    _render = render;
-};
-
-const init = () => {
-    return {
-       header: Header.init(),
-       menu: Menu.init() 
+    isAtProfile: function atProfile() {
+        return this.currentRoute === "profile";
     }
 };
 
-const present = (data) => {
+var _render;
+
+var setRender = function setRender(render) {
+    _render = render;
+};
+
+var init = function init() {
+    dashboard.header = header.init();
+    dashboard.menu = menu.init();
+    dashboard.footer = footer.init();
+
+    return dashboard;
+};
+
+var activeMenuItem = function activeMenu(menu, route) {
+    return menu.map(function(item) {
+        item.active = (item.route === route) ? true : false;
+
+        return item;
+    });
+};
+
+var present = function present(data) {
     if(data.route) {
         dashboard.currentRoute = data.route   
+        dashboard.menu = activeMenuItem(dashboard.menu, data.route);
     }
 
     _render(dashboard);

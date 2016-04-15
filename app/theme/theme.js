@@ -1,8 +1,9 @@
 "use strict";
 
-let home = require("./dashboard");
-let sidebar = require("./menu");
-let header = require("./header");
-let footer = require("./footer");
+var home = require("./dashboard");
+var sidebar = require("./menu");
+var header = require("./header");
+var footer = require("./footer");
+var profile = require("./profile");
 
-module.exports = { home, sidebar, header, footer };
+module.exports = { home, sidebar, header, footer, profile };

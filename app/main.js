@@ -1,6 +1,6 @@
 "use strict";
 
-const start = (state, actions, model, view, theme) => {
+var start = function start(state, actions, model, view, theme) {
     state.init(actions, view);
 
     actions.init(model.present);

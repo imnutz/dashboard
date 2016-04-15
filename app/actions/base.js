@@ -1,11 +1,11 @@
 "use strict";
 
-const nop = () => undefined;
+var nop = function nop() {};
 
-let base = {
+var base = {
     present: nop,
     init: function init(_present) {
-        base.present = _present
+        this.present = _present
     }
 };
 

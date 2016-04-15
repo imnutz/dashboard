@@ -1,10 +1,10 @@
 "use strict";
 
-let base = require("./base");
+var base = require("./base");
 
-let menu = Object.create(base);
+var menu = Object.create(base);
 
-menu.selectRoute = (route) => {
+menu.selectRoute = function(route) {
     this.present({ route: route });
 };
 

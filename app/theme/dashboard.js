@@ -1,8 +1,8 @@
 "use strict";
 
-let h = require("snabbdom/h");
+var h = require("snabbdom/h");
 
-const emailLegends = [
+var emailLegends = [
     {
         title: "Open",
         iconClass: "fa fa-circle text-info"
@@ -17,7 +17,7 @@ const emailLegends = [
     }
 ];
 
-const userBehaviorLegends = [
+var userBehaviorLegends = [
     {
         title: "Open",
         iconClass: "fa fa-circle text-info"
@@ -32,7 +32,7 @@ const userBehaviorLegends = [
     }
 ];
 
-const saleLegends = [
+var saleLegends = [
     {
         title: "Tesla Model S",
         iconClass: "fa fa-circle text-info"
@@ -43,18 +43,18 @@ const saleLegends = [
     }   
 ];
 
-const legend = (legend) => {
+var legend = function legend(legend) {
     return h("span", [
         h("i", {attrs:{class:legend.iconClass}}),
         h("span", String(legend.title))
     ])
 };
 
-const legends = (legends) => {
+var legends = function legends(legends) {
     return h("div.legend", legends.map(legend));
 };
 
-const emailStatistics = () => {
+var emailStatistics = function emailStatistics() {
     return h("div.content", [
         h("div#chartPreferences.ct-chart.ct-perfect-fourth", ""),
         h("div.footer", [
@@ -68,7 +68,7 @@ const emailStatistics = () => {
     ]);
 };
 
-const userBehavior = () => {
+var userBehavior = function userBehavior() {
     return h("div.content", [
         h("div#chartHours.ct-chart"),
         h("div.footer", [
@@ -82,7 +82,7 @@ const userBehavior = () => {
     ]);
 };
 
-const sales = () => {
+var sales = function sales() {
     return h("div.content", [
         h("div#chartActivity.ct-chart"),
         h("div.footer", [
@@ -96,14 +96,14 @@ const sales = () => {
     ]);
 };
 
-const tasks = () => {
+var tasks = function tasks() {
     return h("div.content", [
         h("div.table-full-width", [
         ])
     ])
 };
 
-const card = (title, category, content) => {
+var card = function card(title, category, content) {
     return h("div.card", [
         h("div.header", [
             h("h4.title", String(title)),
@@ -113,7 +113,7 @@ const card = (title, category, content) => {
     ]);
 };
 
-const dashboard = () => {
+var dashboard = function dashboard() {
     return h("div.content", [
         h("div.container-fluid", [
             h("div.row", [

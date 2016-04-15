@@ -1,8 +1,8 @@
 "use strict";
 
-let menu = require("./menu");
+var menu = require("./menu");
 
-const init = function init(_present) {
+var init = function init(_present) {
     menu.init(_present);
 };
 
