@@ -21,16 +21,18 @@ var ready = function ready(data, actions) {
 
     if(data.isAtProfile()) {
         content = theme.profile.profile();
+    } else if(data.isAtContacts()) {
+        content = theme.contacts.contacts([], actions.contacts);
     } else {
-        content = theme.home.dashboard();
+        content = theme.home.dashboard(data.legends);
     }
 
     return h("div.wrapper", [
         theme.sidebar.menu(data.menu, actions.menu),
         h("div.main-panel", [
-            theme.header.header("Lorem ipsum dolor sit."),
+            theme.header.header(data.header.title),
             content,
-            theme.footer.footer(data.footer) 
+            theme.footer.footer(data.footer)
         ])
     ]);
 };

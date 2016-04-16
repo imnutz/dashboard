@@ -1,20 +1,7 @@
 "use strict";
 
 var h = require("snabbdom/h");
-
-var textFormField = function textFormField(inputType, name, value, label, labelFor, placeholder) {
-    return h("div.form-group", [
-        h("label", {props:{for:labelFor}}, label),
-        h("input.form-control", {props:{type: inputType, placeholder: placeholder, value: value}})
-    ]);
-};
-
-var textAreaFormField = function textAreaFormField(name, value, label, labelFor, placeholder) {
-    return h("div.form-group", [
-        h("label", {props:{for:labelFor}}, label),
-        h("textarea.form-control", {props:{rows: 5, placeholder: placeholder}}, String(value))
-    ]);
-};
+var common = require("./common");
 
 var profileForm = function profileForm(title) {
     return h("div.card", [
@@ -25,50 +12,50 @@ var profileForm = function profileForm(title) {
             h("form", [
                 h("div.row", [
                     h("div.col-md-5", [
-                        textFormField("text", "company", "Creative Code Inc.", "Company (disabled)", "", "Company")
+                        common.textFormField("text", "company", "Creative Code Inc.", "Company (disabled)", "", "Company")
                     ]),
 
                     h("div.col-md-3", [
-                        textFormField("text", "username", "michael23", "Username", "", "Username")
+                        common.textFormField("text", "username", "michael23", "Username", "", "Username")
                     ]),
 
                     h("div.col-md-4", [
-                        textFormField("email", "email", "", "Email address", "exampleInputEmail1", "Email")
+                        common.textFormField("email", "email", "", "Email address", "exampleInputEmail1", "Email")
                     ])
                 ]),
 
                 h("div.row", [
                     h("div.col-md-6", [
-                        textFormField("text", "firstName", "Mike", "First name", "", "First name")
+                        common.textFormField("text", "firstName", "Mike", "First name", "", "First name")
                     ]),
                     h("div.col-md-6", [
-                        textFormField("text", "lastName", "Andrew", "Last name", "", "Last name")
+                        common.textFormField("text", "lastName", "Andrew", "Last name", "", "Last name")
                     ])
                 ]),
 
                 h("div.row", [
                     h("div.col-md-12", [
-                        textFormField("text", "address", "Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09", "Address", "", "Home address")
+                        common.textFormField("text", "address", "Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09", "Address", "", "Home address")
                     ])
                 ]),
 
                 h("div.row", [
                     h("div.col-md-4", [
-                        textFormField("text", "city", "City", "City", "", "City")
+                        common.textFormField("text", "city", "City", "City", "", "City")
                     ]),
 
                     h("div.col-md-4", [
-                        textFormField("text", "country", "Country", "Country", "", "Country")
+                        common.textFormField("text", "country", "Country", "Country", "", "Country")
                     ]),
 
                     h("div.col-md-4", [
-                        textFormField("number", "postal", "123", "Postal Code", "", "ZIP code")
+                        common.textFormField("number", "postal", "123", "Postal Code", "", "ZIP code")
                     ])
                 ]),
 
                 h("div.row", [
                     h("div.col-md-12", [
-                        textAreaFormField("aboutMe", "Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09", "About me", "", "Here can be your description")
+                        common.textAreaFormField("aboutMe", "Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09", "About me", "", "Here can be your description")
                     ])
                 ]),
 

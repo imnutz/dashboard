@@ -5,5 +5,8 @@ var sidebar = require("./menu");
 var header = require("./header");
 var footer = require("./footer");
 var profile = require("./profile");
+var contacts = require("./contacts");
 
-module.exports = { home, sidebar, header, footer, profile };
+module.exports = { 
+    home, sidebar, header, footer, profile, contacts
+};

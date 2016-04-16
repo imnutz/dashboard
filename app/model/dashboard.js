@@ -3,16 +3,22 @@
 var menu = require("./menu");
 var header = require("./header");
 var footer = require("./footer");
+var legends = require("./legends");
 
 // Model of application
 var dashboard = {
     header: null,
     menu: null,
     footer: null,
+    legends: null,
     currentRoute: "home",
 
     isAtProfile: function atProfile() {
         return this.currentRoute === "profile";
+    },
+
+    isAtContacts: function atContacts() {
+        return this.currentRoute === "contacts";
     }
 };
 
@@ -26,6 +32,7 @@ var init = function init() {
     dashboard.header = header.init();
     dashboard.menu = menu.init();
     dashboard.footer = footer.init();
+    dashboard.legends = legends;
 
     return dashboard;
 };
@@ -40,8 +47,12 @@ var activeMenuItem = function activeMenu(menu, route) {
 
 var present = function present(data) {
     if(data.route) {
-        dashboard.currentRoute = data.route   
+        dashboard.currentRoute = data.route
         dashboard.menu = activeMenuItem(dashboard.menu, data.route);
+    }
+
+    if(dashboard.isAtContacts()) {
+        dashboard.header.title = "Contacts";
     }
 
     _render(dashboard);
