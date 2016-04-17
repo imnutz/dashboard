@@ -23,7 +23,7 @@ var contactListHeader = function() {
     ]);
 };
 
-var contactRow = function(actions, contacts) {
+var contactRow = function(actions, contact) {
     return h("tr", [
         h("td", String(contact.firstName)),
         h("td", String(contact.lastName)),
@@ -52,6 +52,26 @@ var contacts = function contacts(contacts, actions) {
         headerPanel(actions),
         contactList(contacts, actions)
     ]);
+};
+
+var contactForm = function(contact, actions, isNew) {
+    var firstName = contact.firstName || "",
+        lastName = contact.lastName || "";
+
+    function setFirstName(evt) {
+        firstName = evt.target.value;
+    }
+
+    function setLastName(evt) {
+        lastName = evt.target.value;
+    }
+
+    return h("div.form.contact-form", [
+        common.textFormField("text", "firstName", firstName, "First name", "firstName", ""),
+        common.textFormField("text", "lastName", lastName, "Last name", "lastName", ""),
+        common.buttonDefault("save", "Save"),
+        common.buttonDefault("cancel", "Cancel")
+    ])
 };
 
 module.exports = { contacts };

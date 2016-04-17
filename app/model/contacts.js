@@ -1,7 +1,9 @@
 "use strict";
 
-var contact = {
-    contacts: []
+var init = function() {
+    return {
+        contacts: []
+    };
 };
 
-module.exports = {};
+module.exports = { init };

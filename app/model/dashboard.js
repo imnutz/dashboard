@@ -4,6 +4,7 @@ var menu = require("./menu");
 var header = require("./header");
 var footer = require("./footer");
 var legends = require("./legends");
+var contact = require("./contacts");
 
 // Model of application
 var dashboard = {
@@ -11,6 +12,7 @@ var dashboard = {
     menu: null,
     footer: null,
     legends: null,
+    contact: null,
     currentRoute: "home",
 
     isAtProfile: function atProfile() {
@@ -22,16 +24,22 @@ var dashboard = {
     }
 };
 
-var _render;
+var _render,
+    _services;
 
 var setRender = function setRender(render) {
     _render = render;
+};
+
+var setServices = function(services) {
+    _services = services;
 };
 
 var init = function init() {
     dashboard.header = header.init();
     dashboard.menu = menu.init();
     dashboard.footer = footer.init();
+    dashboard.contact = contact.init();
     dashboard.legends = legends;
 
     return dashboard;
@@ -53,9 +61,15 @@ var present = function present(data) {
 
     if(dashboard.isAtContacts()) {
         dashboard.header.title = "Contacts";
+        _services.contacts
+                 .getContacts()
+                 .then(function(response) {
+                    dashboard.contact.contacts = response;
+                    _render(dashboard);
+                 });
+    } else {
+        _render(dashboard);
     }
-
-    _render(dashboard);
 };
 
-module.exports = { init, present, setRender };
+module.exports = { init, present, setRender, setServices };

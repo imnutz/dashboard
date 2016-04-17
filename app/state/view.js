@@ -22,7 +22,7 @@ var ready = function ready(data, actions) {
     if(data.isAtProfile()) {
         content = theme.profile.profile();
     } else if(data.isAtContacts()) {
-        content = theme.contacts.contacts([], actions.contacts);
+        content = theme.contacts.contacts(data.contact.contacts, actions.contacts);
     } else {
         content = theme.home.dashboard(data.legends);
     }
