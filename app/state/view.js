@@ -21,7 +21,7 @@ var ready = function ready(data, actions) {
 
     if(data.isAtProfile()) {
         content = theme.profile.profile();
-    } else if(data.isAtContacts()) {
+    } else if(data.isAtContacts() && data.contact.contacts) {
         content = theme.contacts.contacts(data.contact.contacts, actions.contacts);
     } else {
         content = theme.home.dashboard(data.legends);

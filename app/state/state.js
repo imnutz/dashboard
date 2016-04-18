@@ -18,7 +18,9 @@ var representation = function representation(data) {
 };
 
 var nap = function nap(data) {
-
+    if(data.isAtContacts() && !data.contact.contacts.length) {
+        _actions.contacts.fetchContacts();
+    }
 };
 
 module.exports = { init, render };

@@ -61,15 +61,13 @@ var present = function present(data) {
 
     if(dashboard.isAtContacts()) {
         dashboard.header.title = "Contacts";
-        _services.contacts
-                 .getContacts()
-                 .then(function(response) {
-                    dashboard.contact.contacts = response;
-                    _render(dashboard);
-                 });
-    } else {
-        _render(dashboard);
     }
+
+    if (data.contacts) {
+        dashboard.contact.contacts = data.contacts;
+    }
+    
+    _render(dashboard);
 };
 
 module.exports = { init, present, setRender, setServices };

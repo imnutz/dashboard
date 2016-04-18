@@ -4,8 +4,10 @@ var nop = function nop() {};
 
 var base = {
     present: nop,
-    init: function init(_present) {
-        this.present = _present
+    services: null,
+    init: function init(_present, _services) {
+        this.present = _present;
+        this.services = _services;
     }
 };
 
