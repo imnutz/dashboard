@@ -59,13 +59,15 @@ var present = function present(data) {
         dashboard.menu = activeMenuItem(dashboard.menu, data.route);
     }
 
-    if(dashboard.isAtContacts()) {
-        dashboard.header.title = "Contacts";
+    if(data.title) {
+        dashboard.header.title = data.title
     }
 
     if (data.contacts) {
         dashboard.contact.contacts = data.contacts;
     }
+
+    dashboard.fetchingContacts = data.fetchingContacts;
     
     _render(dashboard);
 };

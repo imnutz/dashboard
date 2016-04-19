@@ -11,6 +11,7 @@ contacts.fetchContacts = function() {
         .getContacts()
         .then(function(response) {
             data.contacts = response;
+            data.fetchingContacts = false;
             this.present(data);
         }.bind(this));
 };

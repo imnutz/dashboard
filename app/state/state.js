@@ -1,5 +1,8 @@
 "use strict";
 
+var theme = require("../theme/theme");
+var h = require("snabbdom/h");
+
 var _actions,
     _view;
 
@@ -14,11 +17,26 @@ var render = function render(data) {
 };
 
 var representation = function representation(data) {
-    return _view.display(_view.ready(data, _actions));
+    var content = theme.home.dashboard(data.legends);
+
+    if(data.currentRoute === "contacts") {
+        content = theme.contacts.contacts(data.contact.contacts, _actions.contacts);
+    }
+
+    var representation =  h("div.wrapper", [
+        theme.sidebar.menu(data.menu, _actions.menu),
+        h("div.main-panel", [
+            theme.header.header(data.header.title),
+            content,
+            theme.footer.footer(data.footer)
+        ])
+    ]);   
+
+    _view.display(representation);
 };
 
 var nap = function nap(data) {
-    if(data.isAtContacts() && !data.contact.contacts.length) {
+    if(data.fetchingContacts) {
         _actions.contacts.fetchContacts();
     }
 };

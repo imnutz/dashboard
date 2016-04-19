@@ -17,21 +17,11 @@ var init = function init(data, actions) {
 };
 
 var ready = function ready(data, actions) {
-    var content;
-
-    if(data.isAtProfile()) {
-        content = theme.profile.profile();
-    } else if(data.isAtContacts() && data.contact.contacts) {
-        content = theme.contacts.contacts(data.contact.contacts, actions.contacts);
-    } else {
-        content = theme.home.dashboard(data.legends);
-    }
-
     return h("div.wrapper", [
         theme.sidebar.menu(data.menu, actions.menu),
         h("div.main-panel", [
             theme.header.header(data.header.title),
-            content,
+            theme.home.dashboard(data.legends),
             theme.footer.footer(data.footer)
         ])
     ]);
