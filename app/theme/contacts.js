@@ -24,12 +24,22 @@ var contactListHeader = function contactListHeader() {
 };
 
 var contactRow = function(actions, contact) {
+    var editHandler = function(evt) {
+        evt.preventDefault();
+        actions.edit(contact.id)
+    };
+
+    var deleteHandler = function(evt) {
+        evt.preventDefault();
+        actions.delete(contact.id);
+    };
+
     return h("tr", [
         h("td", String(contact.firstName)),
         h("td", String(contact.lastName)),
         h("td", [
-            common.buttonDefault("edit", "Edit"),
-            common.buttonDefault("delete", "Delete")
+            common.buttonDefault("edit", "Edit", editHandler),
+            common.buttonDefault("delete", "Delete", deleteHandler)
         ])
     ]);
 };
@@ -69,17 +79,25 @@ var contactForm = function(contact, actions, isNew) {
     function crudHandler(evt) {
         evt.preventDefault();
 
-        actions.save({
+        var handler = isNew ? actions.save : actions.update;
+
+        handler.call(actions, {
+            id: contact.id,
             firstName: firstName,
             lastName: lastName
         });
+    }
+
+    function cancel(evt) {
+        evt.preventDefault();
+        actions.cancel();
     }
 
     return h("div.form.content.contact-form.container-fluid", [
         common.textFormField("text", "firstName", firstName, "First name", "firstName", "", setFirstName),
         common.textFormField("text", "lastName", lastName, "Last name", "lastName", "", setLastName),
         common.buttonDefault("save", "Save", crudHandler),
-        common.buttonDefault("cancel", "Cancel")
+        common.buttonDefault("cancel", "Cancel", cancel)
     ]);
 };
 

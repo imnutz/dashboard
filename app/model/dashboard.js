@@ -73,6 +73,27 @@ var present = function present(data) {
     dashboard.creatingContact = data.creatingContact;
     dashboard.contactCreated = data.contactCreated;
 
+    dashboard.isEdit = data.isEdit;
+    dashboard.fetchingContact = data.fetchingContact;
+    dashboard.editedContactId = data.editedContactId;
+    dashboard.updatingContact = data.updatingContact;
+    dashboard.contactUpdated = data.contactUpdated;
+
+    dashboard.deletingContact = data.deletingContact;
+    dashboard.deletedContactId = data.deletedContactId;
+    dashboard.contactDeleted = data.contactDeleted;
+
+    dashboard.cancelledContactCrud = data.cancelledContactCrud;
+
+    if(dashboard.deletingContact && dashboard.deletedContactId) {
+        var confirmation = window.confirm("Do you really want to delete this contact");
+        if(confirmation) {
+            dashboard.okForDeleting = true;
+        } else {
+            dashboard.okForDeleting = false;
+        }
+    }
+
     dashboard.dsContact.contact = {
         id: data.id,
         firstName: data.firstName,

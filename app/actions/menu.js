@@ -22,7 +22,10 @@ menu.selectContacts = function(data) {
 menu.selectRoute = function(route) {
     var data = {
         route: route,
-        contactCreated: false
+        contactCreated: false,
+        contactUpdated: false,
+        contactDeleted: false,
+        cancelledCrud: false
     };
 
     if(route === "profile") {

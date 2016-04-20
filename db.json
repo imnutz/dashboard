@@ -1,11 +1,6 @@
 {
   "contacts": [
     {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Doe"
-    },
-    {
       "id": 2,
       "firstName": "John",
       "lastName": "Ben"
@@ -24,11 +19,6 @@
       "firstName": "jim",
       "lastName": "do",
       "id": 5
-    },
-    {
-      "firstName": "s",
-      "lastName": "aaaa",
-      "id": 6
     },
     {
       "firstName": "na",
