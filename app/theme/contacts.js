@@ -3,17 +3,17 @@
 var h = require("snabbdom/h");
 var common = require("./common");
 
-var headerPanel = function(actions) {
+var headerPanel = function headerPanel(actions) {
     return h("div.contacts-header", [
-        h("form.form-inline", [
+        h("div.form-inline", [
             common.textFormField("text", "criteria", "", "Search", "", "keyword"),
             common.buttonDefault("search", "Search"),
-            common.buttonDefault("add", "Add new contact")
+            common.buttonDefault("add", "Add new contact", actions.add.bind(actions))
         ])
     ]);
 };
 
-var contactListHeader = function() {
+var contactListHeader = function contactListHeader() {
     return h("thead", [
         h("tr", [
             h("th", "First name"),
@@ -48,7 +48,7 @@ var contactList = function(contacts, actions) {
 };
 
 var contacts = function contacts(contacts, actions) {
-    return h("div.contact-list.container-fluid", [
+    return h("div.content.contact-list.container-fluid", [
         headerPanel(actions),
         contactList(contacts, actions)
     ]);
@@ -66,12 +66,21 @@ var contactForm = function(contact, actions, isNew) {
         lastName = evt.target.value;
     }
 
-    return h("div.form.contact-form", [
-        common.textFormField("text", "firstName", firstName, "First name", "firstName", ""),
-        common.textFormField("text", "lastName", lastName, "Last name", "lastName", ""),
-        common.buttonDefault("save", "Save"),
+    function crudHandler(evt) {
+        evt.preventDefault();
+
+        actions.save({
+            firstName: firstName,
+            lastName: lastName
+        });
+    }
+
+    return h("div.form.content.contact-form.container-fluid", [
+        common.textFormField("text", "firstName", firstName, "First name", "firstName", "", setFirstName),
+        common.textFormField("text", "lastName", lastName, "Last name", "lastName", "", setLastName),
+        common.buttonDefault("save", "Save", crudHandler),
         common.buttonDefault("cancel", "Cancel")
-    ])
+    ]);
 };
 
-module.exports = { contacts };
+module.exports = { contacts, contactForm };

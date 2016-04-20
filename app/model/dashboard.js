@@ -39,7 +39,7 @@ var init = function init() {
     dashboard.header = header.init();
     dashboard.menu = menu.init();
     dashboard.footer = footer.init();
-    dashboard.contact = contact.init();
+    dashboard.dsContact = contact.init();
     dashboard.legends = legends;
 
     return dashboard;
@@ -64,10 +64,20 @@ var present = function present(data) {
     }
 
     if (data.contacts) {
-        dashboard.contact.contacts = data.contacts;
+        dashboard.dsContact.contacts = data.contacts;
     }
 
+    dashboard.isAdd = data.isAdd;
     dashboard.fetchingContacts = data.fetchingContacts;
+
+    dashboard.creatingContact = data.creatingContact;
+    dashboard.contactCreated = data.contactCreated;
+
+    dashboard.dsContact.contact = {
+        id: data.id,
+        firstName: data.firstName,
+        lastName: data.lastName
+    };
     
     _render(dashboard);
 };

@@ -21,7 +21,8 @@ menu.selectContacts = function(data) {
 
 menu.selectRoute = function(route) {
     var data = {
-        route: route
+        route: route,
+        contactCreated: false
     };
 
     if(route === "profile") {
