@@ -122,7 +122,7 @@ contacts.delete = function prepareDeleting(id) {
 };
 
 contacts.cancel = function cancelCrud() {
-    this.present({ cancelledCrud: true });
+    this.present({ cancelledContactCrud: true });
 }
 
 module.exports = contacts;

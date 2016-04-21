@@ -6,8 +6,6 @@ var common = require("./common");
 var headerPanel = function headerPanel(actions) {
     return h("div.contacts-header", [
         h("div.form-inline", [
-            common.textFormField("text", "criteria", "", "Search", "", "keyword"),
-            common.buttonDefault("search", "Search"),
             common.buttonDefault("add", "Add new contact", actions.add.bind(actions))
         ])
     ]);
