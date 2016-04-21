@@ -9,21 +9,20 @@
       "id": 3,
       "firstName": "Jim",
       "lastName": "Ben"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "name": "todo1",
+      "active": false,
+      "completed": true
     },
     {
-      "firstName": "son",
-      "lastName": "ne",
-      "id": 4
-    },
-    {
-      "firstName": "jim",
-      "lastName": "do",
-      "id": 5
-    },
-    {
-      "firstName": "na",
-      "lastName": "muoi",
-      "id": 7
+      "id": 2,
+      "name": "todo2",
+      "active": true,
+      "completed": false
     }
   ]
 }

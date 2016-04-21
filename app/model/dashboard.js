@@ -5,6 +5,7 @@ var header = require("./header");
 var footer = require("./footer");
 var legends = require("./legends");
 var contact = require("./contacts");
+var todo = require("./todo");
 
 // Model of application
 var dashboard = {
@@ -13,6 +14,7 @@ var dashboard = {
     footer: null,
     legends: null,
     contact: null,
+    todo: null,
     currentRoute: "home",
 
     isAtProfile: function atProfile() {
@@ -40,6 +42,7 @@ var init = function init() {
     dashboard.menu = menu.init();
     dashboard.footer = footer.init();
     dashboard.dsContact = contact.init();
+    dashboard.todo = todo.init();
     dashboard.legends = legends;
 
     return dashboard;
@@ -99,8 +102,21 @@ var present = function present(data) {
         firstName: data.firstName,
         lastName: data.lastName
     };
+
+    presentTodo(data);
     
     _render(dashboard);
+};
+
+var presentTodo = function presentTodo(data) {
+    dashboard.fetchingTodos = data.fetchingTodos;
+    dashboard.todo.todos = data.todos || [];
+
+    var activeTodos = dashboard.todo.todos.filter(function(todo) {
+        return todo.active;
+    });
+
+    dashboard.todo.activeItems = activeTodos.length || 0;
 };
 
 module.exports = { init, present, setRender, setServices };

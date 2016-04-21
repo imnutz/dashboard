@@ -1,5 +1,6 @@
 "use strict";
 
 var contacts = require("./contacts");
+var todo = require("./todo");
 
-module.exports = { contacts };
+module.exports = { contacts, todo };

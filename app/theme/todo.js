@@ -4,16 +4,22 @@ var h = require("snabbdom/h");
 var common = require("./common");
 
 var todoHeader = function todoHeader(actions) {
-    return h("div.todo-header.form-inline", [
-        h("input", {props:{type:"checkbox"}}),
-        h("input", {props:{type:"text"}})
+    return h("thead", [
+        h("tr", [
+            h("th", [
+                h("input", {props:{type:"checkbox"}})
+            ]),
+            h("th", [
+                h("input", {props:{type:"text"}})
+            ])
+        ])
     ]);
 };
 
 var todoListRow = function todoListRow(todo, actions) {
     return h("tr", [
         h("td", [
-            h("input", {props:{type:"checkbox"}})
+            h("input", {props:{type:"checkbox", checked:todo.completed, value: todo.id}})
         ]),
         h("td", String(todo.name)),
         common.buttonDefault("deleteTodo", "Delete")
@@ -23,20 +29,22 @@ var todoListRow = function todoListRow(todo, actions) {
 var todoList = function todoList(todos, actions) {
     return h("div.todo-list", [
         h("table.table", [
+            todoHeader(actions),
             h("tbody", todos.map(todoListRow))
         ])
     ]);
 };
 
-var todoFooter = function todoFooter(actions) {
-
+var todoFooter = function todoFooter(footerInfo, actions) {
+    return h("div.todo-footer", [
+        h("span", footerInfo.activeItems + " items left")
+    ]);
 };
 
-var todo = function todo(todos, actions) {
-    return h("div.todo-app", [
-        todoHeader(actions),
+var todo = function todo(todos, footerInfo, actions) {
+    return h("div.todo-app.content", [
         todoList(todos, actions),
-        todoFooter(actions)
+        todoFooter(footerInfo, actions)
     ]);
 };
 

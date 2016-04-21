@@ -27,6 +27,10 @@ var representation = function representation(data) {
         } else {
             content = theme.contacts.contacts(data.dsContact.contacts, _actions.contacts);
         }
+    } else if(data.currentRoute ===  "todo") {
+        content = theme.todo.todo(data.todo.todos, {
+            activeItems: data.todo.activeItems
+        }, _actions.todo);
     }
 
     var representation =  h("div.wrapper", [
@@ -54,6 +58,8 @@ var nap = function nap(data) {
         _actions.contacts.updateContact(data.dsContact.contact);
     } else if(data.deletingContact && data.okForDeleting) {
         _actions.contacts.deleteContact(data.deletedContactId);
+    } else if(data.fetchingTodos) {
+        _actions.todo.fetchTodos();
     }
 };
 

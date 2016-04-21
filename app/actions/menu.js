@@ -19,6 +19,13 @@ menu.selectContacts = function(data) {
     this.present(data);
 };
 
+menu.selectTodo = function selectTodo(data) {
+    data = data || {};
+    data.title = "Todo List";
+    data.fetchingTodos = true;
+    this.present(data);
+};
+
 menu.selectRoute = function(route) {
     var data = {
         route: route,
@@ -32,6 +39,8 @@ menu.selectRoute = function(route) {
         menu.selectProfile(data);
     } else if(route === "contacts") {
         menu.selectContacts(data);
+    } else if(route === "todo") {
+        menu.selectTodo(data);
     }
 };
 
