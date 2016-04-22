@@ -66,6 +66,13 @@ var present = function present(data) {
         dashboard.header.title = data.title
     }
 
+    presentContact(data);
+    presentTodo(data);
+
+    _render(dashboard);
+};
+
+var presentContact = function presentContact(data) {
     if (data.contacts) {
         dashboard.dsContact.contacts = data.contacts;
     }
@@ -102,10 +109,6 @@ var present = function present(data) {
         firstName: data.firstName,
         lastName: data.lastName
     };
-
-    presentTodo(data);
-
-    _render(dashboard);
 };
 
 var presentTodo = function presentTodo(data) {
