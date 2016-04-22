@@ -18,4 +18,28 @@ todo.fetchTodos = function actFetchTodos() {
         }.bind(this));
 };
 
+todo.checkedTodo = function checkedTodo(id) {
+    var data = {
+        checkedId: id
+    };
+
+    this.present(data);
+};
+
+todo.checkedAll = function checkAll() {
+    var data = {
+        checkAll: true
+    };
+
+    this.present(data);
+};
+
+todo.addTodo = function addTodo(todoName) {
+    this.present({ todoName: todoName });
+};
+
+todo.deleteTodo = function deleteTodo(id) {
+    this.present({ deletedTodoId: id });
+};
+
 module.exports = todo;

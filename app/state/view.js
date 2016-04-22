@@ -21,7 +21,7 @@ var ready = function ready(data, actions) {
         theme.sidebar.menu(data.menu, actions.menu),
         h("div.main-panel", [
             theme.header.header(data.header.title),
-            theme.home.dashboard(data.legends),
+            theme.home.home(),
             theme.footer.footer(data.footer)
         ])
     ]);

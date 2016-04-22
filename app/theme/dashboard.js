@@ -93,4 +93,8 @@ var dashboard = function dashboard(legends) {
     ]);
 };
 
-module.exports = { dashboard };
+var home = function() {
+    return h("div.content", "Welcome to my dashboard");
+};
+
+module.exports = { dashboard, home };

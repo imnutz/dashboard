@@ -17,7 +17,7 @@ var render = function render(data) {
 };
 
 var representation = function representation(data) {
-    var content = theme.home.dashboard(data.legends);
+    var content = theme.home.home();
 
     if(data.currentRoute === "contacts") {
         if(data.isAdd) {
@@ -28,7 +28,7 @@ var representation = function representation(data) {
             content = theme.contacts.contacts(data.dsContact.contacts, _actions.contacts);
         }
     } else if(data.currentRoute ===  "todo") {
-        content = theme.todo.todo(data.todo.todos, {
+        content = theme.todo.todo(data.todo.todos, data.todo.allCompleted, {
             activeItems: data.todo.activeItems
         }, _actions.todo);
     }

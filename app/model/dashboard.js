@@ -104,17 +104,68 @@ var present = function present(data) {
     };
 
     presentTodo(data);
-    
+
     _render(dashboard);
 };
 
 var presentTodo = function presentTodo(data) {
     dashboard.fetchingTodos = data.fetchingTodos;
-    dashboard.todo.todos = data.todos || [];
+    if(data.todos) {
+        dashboard.todo.todos = data.todos;
+    }
+
+    if(data.checkedId) {
+        dashboard.todo.todos.forEach(function(todo) {
+            if(todo.id === Number(data.checkedId)) {
+                todo.completed = !todo.completed;
+                todo.active = !todo.active;
+            }
+        });
+    }
+
+    if(data.checkAll) {
+        if(!dashboard.todo.allCompleted) {
+            dashboard.todo.todos.forEach(function(todo) {
+                todo.completed = true;
+                todo.active = false;
+            });
+        } else {
+            dashboard.todo.todos.forEach(function(todo) {
+                todo.completed = false;
+                todo.active = true;
+            });
+        }
+
+        dashboard.todo.allCompleted = !dashboard.todo.allCompleted;
+    }
+
+    if(data.todoName) {
+        var nextId = dashboard.todo.todos.length + 1;
+        dashboard.todo.todos.push({
+            id: nextId,
+            name: data.todoName,
+            active: true,
+            completed: false
+        });
+    }
+
+    if(data.deletedTodoId) {
+        var filteredTodos = dashboard.todo.todos.filter(function(todo) {
+            return todo.id != data.deletedTodoId;
+        });
+
+        dashboard.todo.todos = filteredTodos;
+    }
 
     var activeTodos = dashboard.todo.todos.filter(function(todo) {
         return todo.active;
     });
+
+    if(!activeTodos.length) {
+        dashboard.todo.allCompleted = true;
+    } else {
+        dashboard.todo.allCompleted = false;
+    }
 
     dashboard.todo.activeItems = activeTodos.length || 0;
 };
