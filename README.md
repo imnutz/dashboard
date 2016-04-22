@@ -1,9 +1,12 @@
 #Dashboard
 
+Using [SAM Pattern](http://sam.js.org)
+
 Based on: http://demos.creative-tim.com/light-bootstrap-dashboard
 
-Attempt to split the webapp into folders + components:
+Attempt to split the webapp into folders + components.
 
+Contains 2 working components:
 - Contact manager
 - Todo list
 
