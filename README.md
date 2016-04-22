@@ -10,6 +10,8 @@ Contains 2 working components:
 - Contact manager
 - Todo list
 
+![dashboard](https://cloud.githubusercontent.com/assets/2680785/14747076/ba29d9ac-08dc-11e6-92ca-5f8f614c738d.png)
+
 ## Run
 - Build
 
