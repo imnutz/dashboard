@@ -70,7 +70,7 @@ var present = function present(data) {
     }
 
     presentContact(data, _render);
-    presentTodo(data);
+    presentTodo(data, _render);
 };
 
 var presentContact = function presentContact(data, render) {
@@ -153,10 +153,14 @@ var presentContact = function presentContact(data, render) {
     }
 };
 
-var presentTodo = function presentTodo(data) {
-    dashboard.fetchingTodos = data.fetchingTodos;
-    if(data.todos) {
-        dashboard.todo.todos = data.todos;
+var presentTodo = function presentTodo(data, render) {
+    if(data.fetchingTodos) {
+        todoService
+            .getTodos()
+            .then(function(response) {
+                dashboard.todo.todos = response;
+                postPresentTodo(dashboard, render);
+            });
     }
 
     if(data.checkedId) {
@@ -166,6 +170,7 @@ var presentTodo = function presentTodo(data) {
                 todo.active = !todo.active;
             }
         });
+        postPresentTodo(dashboard, render);
     }
 
     if(data.checkAll) {
@@ -182,6 +187,8 @@ var presentTodo = function presentTodo(data) {
         }
 
         dashboard.todo.allCompleted = !dashboard.todo.allCompleted;
+
+        postPresentTodo(dashboard, render);
     }
 
     if(data.todoName) {
@@ -192,6 +199,7 @@ var presentTodo = function presentTodo(data) {
             active: true,
             completed: false
         });
+        postPresentTodo(dashboard, render);
     }
 
     if(data.deletedTodoId) {
@@ -200,8 +208,11 @@ var presentTodo = function presentTodo(data) {
         });
 
         dashboard.todo.todos = filteredTodos;
+        postPresentTodo(dashboard, render);
     }
+};
 
+var postPresentTodo = function(data, render) {
     var activeTodos = dashboard.todo.todos.filter(function(todo) {
         return todo.active;
     });
@@ -213,6 +224,7 @@ var presentTodo = function presentTodo(data) {
     }
 
     dashboard.todo.activeItems = activeTodos.length || 0;
-};
+    render(dashboard);
+}
 
 module.exports = { init, present, setRender, setServices };
