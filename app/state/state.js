@@ -20,7 +20,7 @@ var representation = function representation(data) {
     var content = theme.home.home();
 
     if(data.currentRoute === "contacts") {
-        if(data.isAdd) {
+        if(data.isAddingContact) {
             content = theme.contacts.contactForm({}, _actions.contacts, true);
         } else if(data.isEdit) {
             content = theme.contacts.contactForm(data.dsContact.contact || {}, _actions.contacts, false);
@@ -46,20 +46,8 @@ var representation = function representation(data) {
 };
 
 var nap = function nap(data) {
-    if(data.fetchingContacts) {
-        _actions.contacts.fetchContacts();
-    } else if(data.creatingContact) {
-        _actions.contacts.createContact(data.dsContact.contact);
-    } else if(data.contactCreated || data.contactUpdated || data.contactDeleted || data.cancelledContactCrud) {
+    if(data.contactCreated || data.contactUpdated || data.contactDeleted || data.cancelledContactCrud) {
         _actions.menu.selectRoute("contacts");
-    } else if(data.fetchingContact) {
-        _actions.contacts.fetchContact(data.editedContactId);
-    } else if(data.updatingContact) {
-        _actions.contacts.updateContact(data.dsContact.contact);
-    } else if(data.deletingContact && data.okForDeleting) {
-        _actions.contacts.deleteContact(data.deletedContactId);
-    } else if(data.fetchingTodos) {
-        _actions.todo.fetchTodos();
     }
 };
 

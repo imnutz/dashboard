@@ -7,6 +7,9 @@ var legends = require("./legends");
 var contact = require("./contacts");
 var todo = require("./todo");
 
+var contactService = require("../services/contacts");
+var todoService = require("../services/todo");
+
 // Model of application
 var dashboard = {
     header: null,
@@ -66,49 +69,88 @@ var present = function present(data) {
         dashboard.header.title = data.title
     }
 
-    presentContact(data);
+    presentContact(data, _render);
     presentTodo(data);
-
-    _render(dashboard);
 };
 
-var presentContact = function presentContact(data) {
-    if (data.contacts) {
-        dashboard.dsContact.contacts = data.contacts;
+var presentContact = function presentContact(data, render) {
+    if(data.showContactList) {
+        dashboard.contactUpdated = data.contactUpdated;
+        dashboard.contactCreated = data.contactCreated;
+        dashboard.contactDeleted = data.contactDeleted;
+        dashboard.cancelledContactCrud = data.cancelledContactCrud;
+        dashboard.isAddingContact = false;
+        dashboard.isEdit = false;
+
+        contactService
+            .getContacts()
+            .then(function(response) {
+                dashboard.showContactList = false;
+                dashboard.dsContact.contacts = response;
+                render(dashboard);
+            });
+    } 
+
+    if(data.isEdit) {
+        dashboard.isEdit = data.isEdit;
+        dashboard.editedContactId = data.editedContactId;
+        contactService
+            .getContact(dashboard.editedContactId)
+            .then(function(response) {
+                dashboard.showEditForm = false;
+                dashboard.dsContact.contact = response;
+                render(dashboard);
+            });       
     }
 
-    dashboard.isAdd = data.isAdd;
-    dashboard.fetchingContacts = data.fetchingContacts;
+    if(data.isAddingContact) {
+        dashboard.isAddingContact = data.isAddingContact;
+        render(dashboard);
+    }
+    
+    if(data.updatingContact) {
+        contactService
+            .updateContact({
+                id: data.id,
+                firstName: data.firstName,
+                lastName: data.lastName
+            })
+            .then(function(response) {
+                dashboard.isEdit = false;
+                dashboard.contactUpdated = true;
+                render(dashboard);
+            })
+    }
 
-    dashboard.creatingContact = data.creatingContact;
-    dashboard.contactCreated = data.contactCreated;
+    if(data.creatingContact) {
+        contactService
+            .createContact({
+                firstName: data.firstName,
+                lastName: data.lastName
+            }) 
+            .then(function(response) {
+                dashboard.isAddingContact = false;
+                dashboard.contactCreated = true;
+                render(dashboard);
+            });
+    }
 
-    dashboard.isEdit = data.isEdit;
-    dashboard.fetchingContact = data.fetchingContact;
-    dashboard.editedContactId = data.editedContactId;
-    dashboard.updatingContact = data.updatingContact;
-    dashboard.contactUpdated = data.contactUpdated;
-
-    dashboard.deletingContact = data.deletingContact;
-    dashboard.deletedContactId = data.deletedContactId;
-    dashboard.contactDeleted = data.contactDeleted;
-
-    dashboard.cancelledContactCrud = data.cancelledContactCrud;
-
-    if(dashboard.deletingContact && dashboard.deletedContactId) {
+    if(data.deletingContact) {
         var confirmation = window.confirm("Do you really want to delete this contact");
         if(confirmation) {
-            dashboard.okForDeleting = true;
-        } else {
-            dashboard.okForDeleting = false;
+            contactService
+                .deleteContact(data.deletedContactId)
+                .then(function() {
+                    dashboard.contactDeleted = true;
+                    render(dashboard);
+                });
         }
     }
 
-    dashboard.dsContact.contact = {
-        id: data.id,
-        firstName: data.firstName,
-        lastName: data.lastName
-    };
+    if(data.cancelledContactCrud) {
+        dashboard.cancelledContactCrud = data.cancelledContactCrud;
+        render(dashboard);
+    }
 };
 
 var presentTodo = function presentTodo(data) {

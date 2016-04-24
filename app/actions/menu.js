@@ -15,7 +15,7 @@ menu.selectContacts = function(data) {
     data = data || {};
 
     data.title = "Contacts";
-    data.fetchingContacts = true;
+    data.showContactList = true;
     this.present(data);
 };
 
@@ -32,7 +32,9 @@ menu.selectRoute = function(route) {
         contactCreated: false,
         contactUpdated: false,
         contactDeleted: false,
-        cancelledCrud: false
+        cancelledContactCrud: false,
+        isEdit: false,
+        isAdd: false
     };
 
     if(route === "profile") {
